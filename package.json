@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-template",
+  "name": "med-web-app",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -38,5 +38,15 @@
     "babel-plugin-react-transform": "^2.0.2",
     "babel-preset-stage-0": "^6.5.0",
     "react-transform-hmr": "^1.0.4"
-  }
+  },
+  "description": "![](http://i.imgur.com/DUiL9yn.png)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaftand/kaftand.github.io.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/kaftand/kaftand.github.io/issues"
+  },
+  "homepage": "https://github.com/kaftand/kaftand.github.io#readme"
 }
