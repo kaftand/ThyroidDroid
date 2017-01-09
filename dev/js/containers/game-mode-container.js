@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import {bindActionCreators} from 'redux';
+import {selectMode} from '../actions/index'
+import GameMode from '../components/game-mode'
 /*
  * We need "if(!this.props.user)" because we set state to null by default
  * */
-
+console.log('this is selectMode: ', selectMode)
 class GameModeContainer extends Component {
     constructor(props) {
-      if{!props.mode}
-      {
-        props.mode = 'leaderboard';
-      }
       super(props);
+      console.log('Container Props', props)
+    }
+    componentWillReceiveProps(NextProps) {
+  console.log('componentWillReceiveProps', NextProps);
     }
     render() {
-      <GameMode mode={this.props.mode} />
+      console.log(this.props.mode)
+      return (<GameMode mode={this.props.mode} onSelectMode={this.props.selectMode}/>)
     }
 }
 
@@ -25,4 +28,8 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(GameModeContainer);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({selectMode:selectMode}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameModeContainer);

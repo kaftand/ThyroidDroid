@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 class GameMode extends Component {
   constructor(props) {
     super(props)
-    var classNames = getClassNames(this.props.mode)
-    this.states = classNames;
+    console.log('This is props: ', this.props)
   }
   getClassNames(mode) {
     switch(mode) {
@@ -30,12 +29,16 @@ class GameMode extends Component {
         }
       }
     }
-    render() {
+  render() {
+    var classNames = this.getClassNames(this.props.mode);
+    return (
       <div>
-        <a className={this.states.review} onClick>Review</a>
-        <a className={this.states.leaderboard}>Leadboard</a>
-        <a className={this.states.subjects}>Subjects</a>
+        <a className={classNames.review} onClick={() => this.props.onSelectMode('review')}>Review</a>
+        <a className={classNames.leaderboard} onClick={() => this.props.onSelectMode('leaderboard')}>Leadboard</a>
+        <a className={classNames.subjects} onClick={() => this.props.onSelectMode('subjects')}>Subjects</a>
       </div>
-    }
+    )
   }
 }
+
+export default GameMode

@@ -5,3 +5,11 @@ export const selectUser = (user) => {
         payload: user
     }
 };
+
+export const selectMode = (mode) => {
+    console.log("You clicked on mode: ", mode);
+    return {
+        type: 'MODE_SELECTED',
+        payload: mode
+    }
+};
