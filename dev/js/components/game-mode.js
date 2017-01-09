@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 class GameMode extends Component {
   constructor(props) {
     super(props)
-    console.log('This is props: ', this.props)
   }
   getClassNames(mode) {
     switch(mode) {
