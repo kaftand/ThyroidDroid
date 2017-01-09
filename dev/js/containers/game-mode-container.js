@@ -6,17 +6,11 @@ import GameMode from '../components/game-mode'
 /*
  * We need "if(!this.props.user)" because we set state to null by default
  * */
-console.log('this is selectMode: ', selectMode)
 class GameModeContainer extends Component {
     constructor(props) {
       super(props);
-      console.log('Container Props', props)
-    }
-    componentWillReceiveProps(NextProps) {
-  console.log('componentWillReceiveProps', NextProps);
     }
     render() {
-      console.log(this.props.mode)
       return (<GameMode mode={this.props.mode} onSelectMode={this.props.selectMode}/>)
     }
 }
