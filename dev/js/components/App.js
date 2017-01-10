@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import GameMode from './game-mode';
-import GameModeContainer from '../containers/game-mode-container';
-import ContentPaneContainer from '../containers/content-pane-container';
-import LoginContainer from '../containers/login-container';
-import LogOutContainer from '../containers/logout-container'
+import LoggedInViewContainer from '../containers/logged-in-view-container'
+import LoggedOutViewContainer from '../containers/logged-out-view-container'
 require('../../scss/style.scss');
 
 class App extends Component {
@@ -13,14 +10,14 @@ class App extends Component {
   }
   render ()
   {
-    return (
-      <div>
-        <h2>Thyroid</h2>
-        <GameModeContainer />
-        <LogOutContainer/>
-        <ContentPaneContainer />
-        <LoginContainer />
-      </div>)
+    if (!this.props.user)
+    {
+      return (<LoggedOutViewContainer />)
+    }
+    else
+    {
+      return (<LoggedInViewContainer user={this.props.user}/>)
+    }
   }
 
 }
