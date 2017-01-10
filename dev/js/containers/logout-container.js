@@ -11,7 +11,7 @@ class LogoutContainer extends Component {
   }
   render ()
   {
-    return <Logout logOutFcn = {this.props.logOutFcn} />
+    return <Logout logOutFcn = {this.props.logOutFcn}/>
   }
 }
 
@@ -20,5 +20,6 @@ function mapDispatchToProps(dispatch) {
         logOutFcn:authSignOut,
       }, dispatch)
 }
+
 
 export default connect(null, mapDispatchToProps)(LogoutContainer);

@@ -19,8 +19,6 @@ export const authListen = function () {
  return (dispatch, getState)=> {   //using a redux-thunk instead of normal action
 
    firebase.auth().onAuthStateChanged(function (user) {
-
-         // User is signed in, dispatch action
          console.log(user);
          dispatch({type: 'AUTH_CHANGE', payload: user})
  });
