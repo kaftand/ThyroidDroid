@@ -9,8 +9,15 @@ class ContentPaneContainer extends Component {
     super(props)
   }
   render() {
-    return <ContentPane/>
+    return <ContentPane mode={this.props.mode}/>
   }
 }
 
-export default ContentPaneContainer
+function mapStateToProps(state)
+{
+  return {
+    mode:state.mode
+  }
+}
+
+export default connect (mapStateToProps)(ContentPaneContainer)
