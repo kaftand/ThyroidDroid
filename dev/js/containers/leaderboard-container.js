@@ -9,8 +9,14 @@ class LeaderboardContainer extends Component {
     super(props)
   }
   render() {
-    return <Leaderboard />
+    console.log(this.props.leaders)
+    return <Leaderboard leaders={this.props.leaders}/>
   }
 }
 
-export default LeaderboardContainer
+function mapStateToProps(state) {
+    return {
+        leaders: state.leaders,
+    };
+}
+export default connect(mapStateToProps)(LeaderboardContainer)

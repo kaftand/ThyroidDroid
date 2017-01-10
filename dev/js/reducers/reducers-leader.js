@@ -1,7 +1,7 @@
-export default function (state='leaderboard', action) {
+export default function (state=null, action) {
   switch(action.type)
   {
-    case 'MODE_SELECTED':
+    case 'LEADER_UPDATE':
       return action.payload;
       break;
   }

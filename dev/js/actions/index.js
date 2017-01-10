@@ -59,6 +59,18 @@ export function authRegister (username, password) {
     })
 }
 
+export function getLeaders()
+{
+  return dispatch => {
+    firebase.database().ref().child("users").orderByChild("totalScore").limitToLast(5).on('value', snapshot => {
+      dispatch({
+        type:'LEADER_UPDATE',
+        payload: snapshot.val()
+      });
+    });
+  }
+}
+
 export function authSignOut () {
   return dispatch => {
     console.log('hit signout')
