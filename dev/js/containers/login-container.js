@@ -7,11 +7,16 @@ import Login from '../components/login'
 class LoginContainer extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props.login)
-    console.log(this.props.register)
   }
   render() {
-    return <Login login={this.props.login} register={this.props.register}/>
+    if(this.props.error)
+    {
+      return <Login login={this.props.login} register={this.props.register} error={this.props.error.message}/>
+    }
+    else
+    {
+      return <Login login={this.props.login} register={this.props.register} />
+    }
   }
 }
 
@@ -24,7 +29,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        error: state.errorLogin
+        error: state.loginError,
     };
 }
 

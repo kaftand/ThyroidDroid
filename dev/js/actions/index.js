@@ -1,24 +1,34 @@
 import * as firebase from 'firebase';
 
 
-firebase.initializeApp({
-  apiKey: "AIzaSyCo2EkqIecK5DFdiI1rVI2SAJT2EVxOpKU",                             // Auth / General Use
-  authDomain: "uterine-pathology.firebaseapp.com",         // Auth with popup/redirect
-  databaseURL: "https://uterine-pathology.firebaseio.com", // Realtime Database
-  storageBucket: "uterine-pathology.appspot.com",          // Storage
-});
+var config = {
+  apiKey: "AIzaSyCo2EkqIecK5DFdiI1rVI2SAJT2EVxOpKU",
+  authDomain: "uterine-pathology.firebaseapp.com",
+  databaseURL: "https://uterine-pathology.firebaseio.com",
+  storageBucket: "uterine-pathology.appspot.com",
+  messagingSenderId: "657975423881"
+};
+firebase.initializeApp(config);
 
 const auth = firebase.auth();
 
-export const authListen = () => {
-  return dispatch => {
-    auth.onAuthStateChanged(user => {
-      dispatch({
-        type: 'AUTH_CHANGE',
-        payload: user
-      })
-    })
-  }
+export const authListen = function () {
+
+ //this listener will update state upon changes of auth status.
+
+ return (dispatch, getState)=> {   //using a redux-thunk instead of normal action
+
+   firebase.auth().onAuthStateChanged(function (user) {
+
+     if (user) {
+         // User is signed in, dispatch action
+         console.log(user);
+
+         //action A
+         dispatch({type: 'AUTH_CHANGE', payload: user.providerData})
+     }
+ });
+ }
 }
 
 export function authSignIn (username, password) {
@@ -30,7 +40,7 @@ export function authSignIn (username, password) {
   {
     password='';
   }
-  return dispatch => auth.signInWithEmailAndPassword(username, password).catch(e => {
+  return dispatch => firebase.auth().signInWithEmailAndPassword(username, password).catch(e => {
       dispatch({
         type:'LOGIN_ERROR',
         payload:e
@@ -47,7 +57,7 @@ export function authRegister (username, password) {
   {
     password='';
   }
-  return dispatch => auth.createUserWithEmailAndPassword(username, password).catch(e => {
+  return dispatch => firebase.auth().createUserWithEmailAndPassword(username, password).catch(e => {
       dispatch({
         type:'LOGIN_ERROR',
         payload:e
@@ -55,6 +65,12 @@ export function authRegister (username, password) {
     })
 }
 
+export function authSignOut () {
+  return dispatch => {
+    console.log('hit signout')
+    firebase.auth().signOut();
+  }
+}
 
 export const selectUser = (user) => {
     console.log('You clicked on user: ', user.first);
