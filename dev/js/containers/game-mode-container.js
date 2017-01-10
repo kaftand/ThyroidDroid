@@ -11,6 +11,7 @@ class GameModeContainer extends Component {
       super(props);
     }
     render() {
+      console.log('selectmode ', this.props.selectMode)
       return (<GameMode mode={this.props.mode} onSelectMode={this.props.selectMode}/>)
     }
 }
