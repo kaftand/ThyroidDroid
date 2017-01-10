@@ -20,13 +20,9 @@ export const authListen = function () {
 
    firebase.auth().onAuthStateChanged(function (user) {
 
-     if (user) {
          // User is signed in, dispatch action
          console.log(user);
-
-         //action A
-         dispatch({type: 'AUTH_CHANGE', payload: user.providerData})
-     }
+         dispatch({type: 'AUTH_CHANGE', payload: user})
  });
  }
 }
