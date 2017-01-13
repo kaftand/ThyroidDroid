@@ -91,32 +91,21 @@ export function loadLessons(topic, part) {
     firebase.storage().ref().child('/' + topic + '/' + part + '.txt').getDownloadURL().then(
         function (url){
           console.log(url)
-        //var instance = axios.create({
-        //   baseURL: url,
-        //   timeout: 1000,
-        //   headers: {
-        //     'Access-Control-Allow-Origin': '*',
-        //     'Access-Control-Allow-Credentials':'true',
-        //     'Access-Control-Allow-Methods':'GET,HEAD,OPTIONS,POST,PUT',
-        //     'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
-        //   }
-        // });
-        // console.log(url);
-        // instance.get(url).then(
-        //   function (data) {
-        //     console.log(data)
-        //     var lesson = extractLesson(data)
-        //     dispatch({
-        //       type:'LESSON_LOAD',
-        //       payload:lesson
-        //     });
-        //   }
-        // );
-        var xmlHttp = new XMLHttpRequest();
-xmlHttp.open( "GET", url, false ); // false for synchronous request
-xmlHttp.setRequestHeader('Access-Control-Allow-Origin','*')
-xmlHttp.send( null );
-console.log( xmlHttp.responseText);
+          var instance = axios.create({
+            baseURL: url,
+            timeout: 1000,
+          });
+          console.log(url);
+          instance.get(url).then(
+            function (data) {
+              console.log(data)
+              var lesson = extractLesson(data.data)
+             dispatch({
+               type:'LESSON_LOAD',
+               payload:lesson
+             });
+           }
+         );
       }
     );
   }

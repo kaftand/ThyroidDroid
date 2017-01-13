@@ -8,6 +8,7 @@ import TopicsPartReducer from './reducers-topicpart'
 import CasesReducer from './reducers-cases'
 import CasesPartReducer from './reducers-casepart'
 import LoadingReducer from './reducers-loading'
+import LessonReducer from './reducers-lesson'
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -23,7 +24,8 @@ const allReducers = combineReducers({
     topicpart: TopicsPartReducer,
     cases: CasesReducer,
     casepart: CasesPartReducer,
-    loading: LoadingReducer
+    loading: LoadingReducer,
+    lesson: LessonReducer
 });
 
 export default allReducers
