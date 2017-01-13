@@ -114,6 +114,7 @@ export function loadLessons(topic, part) {
         // );
         var xmlHttp = new XMLHttpRequest();
 xmlHttp.open( "GET", url, false ); // false for synchronous request
+xmlHttp.setRequestHeader('Access-Control-Allow-Origin': '*')
 xmlHttp.send( null );
 console.log( xmlHttp.responseText);
       }
