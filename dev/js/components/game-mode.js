@@ -7,23 +7,23 @@ class GameMode extends Component {
   }
   getClassNames(mode) {
     switch(mode) {
-      case 'review':
+      case 'LEARN':
         return {
-          review:'selectedMode',
-          leaderboard:'unSelectedMode',
-          subjects:'unSelectedMode'
+          LEARN:'selectedMode',
+          LEADERBOARD:'unSelectedMode',
+          CASES:'unSelectedMode'
         }
-      case 'subjects':
+      case 'CASES':
         return {
-          review:'unSelectedMode',
-          leaderboard:'unSelectedMode',
-          subjects:'selectedMode'
+          LEARN:'unSelectedMode',
+          LEADERBOARD:'unSelectedMode',
+          CASES:'selectedMode'
         }
       default:
         return {
-          review:'unSelectedMode',
-          leaderboard:'selectedMode',
-          subjects:'unSelectedMode'
+          LEARN:'unSelectedMode',
+          LEADERBOARD:'selectedMode',
+          CASES:'unSelectedMode'
         }
       }
     }
@@ -31,9 +31,9 @@ class GameMode extends Component {
     var classNames = this.getClassNames(this.props.mode);
     return (
       <div>
-        <a className={classNames.review} onClick={() => this.props.onSelectMode('review')}>Review</a>
-        <a className={classNames.leaderboard} onClick={() => this.props.onSelectMode('leaderboard')}>Leadboard</a>
-        <a className={classNames.subjects} onClick={() => this.props.onSelectMode('subjects')}>Subjects</a>
+        <a className={classNames.LEARN} onClick={() => this.props.onSelectMode('LEARN')}>LEARN</a>
+        <a className={classNames.LEADERBOARD} onClick={() => this.props.onSelectMode('LEADERBOARD')}>LEADERBOARD</a>
+        <a className={classNames.CASES} onClick={() => this.props.onSelectMode('CASES')}>CASES</a>
       </div>
     )
   }

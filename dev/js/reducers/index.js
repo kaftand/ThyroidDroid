@@ -2,7 +2,8 @@ import {combineReducers} from 'redux';
 import GameModeReducer from './reducers-game-mode';
 import AuthReducer from './reducers-auth';
 import LoginErrorReducer from './reducers-login-error';
-import LeaderReducer from './reducers-leader'
+import LeaderReducer from './reducers-leader';
+import TopicsReducer from './reducers-topics';
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -13,7 +14,8 @@ const allReducers = combineReducers({
     mode: GameModeReducer,
     user: AuthReducer,
     loginError: LoginErrorReducer,
-    leaders: LeaderReducer
+    leaders: LeaderReducer,
+    topics: TopicsReducer
 });
 
 export default allReducers

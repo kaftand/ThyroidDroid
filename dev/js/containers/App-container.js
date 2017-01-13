@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import App from '../components/App';
-import {authListen, getLeaders} from '../actions/index'
+import {authListen, getLeaders, getTopicsQuestionsAndScores} from '../actions/index'
+
 
 
 class AppContainer extends Component {
@@ -11,6 +12,7 @@ class AppContainer extends Component {
     super(props)
     this.props.authListen()
     this.props.leaderListen()
+    this.props.getTopicsQuestionsAndScores()
   }
   render ()
   {
@@ -22,7 +24,8 @@ class AppContainer extends Component {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
       authListen:authListen,
-      leaderListen:getLeaders
+      leaderListen:getLeaders,
+      getTopicsQuestionsAndScores:getTopicsQuestionsAndScores
     }, dispatch)
 }
 

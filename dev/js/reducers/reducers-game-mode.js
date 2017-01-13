@@ -1,4 +1,4 @@
-export default function (state='leaderboard', action) {
+export default function (state='LEADERBOARD', action) {
   switch(action.type)
   {
     case 'MODE_SELECTED':

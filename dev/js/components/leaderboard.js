@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {bubbleSortFTWFields} from '../util'
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Leaderboard extends Component {
     {
       return null
     }
-    console.log(leaders.length)
+    leaders = bubbleSortFTWFields(leaders, 'totalScore');
     var leaderList = [];
     for(var key in leaders)
     {
@@ -18,7 +19,6 @@ class Leaderboard extends Component {
                           {leaders[key].username} {leaders[key].totalScore}
                           </li>)
     }
-    console.log(leaderList)
     return leaderList
   }
   render ()

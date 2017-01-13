@@ -8,15 +8,15 @@ class ContentPane extends Component {
     super(props)
   }
   render() {
-    if (this.props.mode === 'leaderboard')
+    if (this.props.mode === 'LEADERBOARD')
     {
       return <LeaderboardContainer />
     }
-    else if (this.props.mode === 'learn')
+    else if (this.props.mode === 'LEARN')
     {
       return <LearnContainer />
     }
-    else if (this.props.mode === 'cases')
+    else if (this.props.mode === 'CASES')
     {
       return <CasesContainer />
     }

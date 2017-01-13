@@ -12,4 +12,10 @@ class LearnContainer extends Component {
   }
 }
 
-export default LearnContainer
+function mapStateToProps(state) {
+    return {
+        topics: state.topics,
+    };
+}
+
+export default connect(mapStateToProps)(LearnContainer)

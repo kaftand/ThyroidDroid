@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-
+import {parseUsername} from '../util'
 
 var config = {
   apiKey: "AIzaSyCo2EkqIecK5DFdiI1rVI2SAJT2EVxOpKU",
@@ -11,6 +11,7 @@ var config = {
 firebase.initializeApp(config);
 
 const auth = firebase.auth();
+const ref = firebase.database().ref();
 
 export const authListen = function () {
 
@@ -20,6 +21,10 @@ export const authListen = function () {
 
    firebase.auth().onAuthStateChanged(function (user) {
          console.log(user);
+         if(user)
+         {
+           user.username=parseUsername(user.email)
+         }
          dispatch({type: 'AUTH_CHANGE', payload: user})
  });
  }
@@ -63,6 +68,7 @@ export function getLeaders()
 {
   return dispatch => {
     firebase.database().ref().child("users").orderByChild("totalScore").limitToLast(5).on('value', snapshot => {
+      console.log('snapshot.val() ', snapshot.val())
       dispatch({
         type:'LEADER_UPDATE',
         payload: snapshot.val()
@@ -78,8 +84,19 @@ export function authSignOut () {
   }
 }
 
+export function getTopicsQuestionsAndScores () {
+  return dispatch => {
+    ref.child('Topics').child('Uterine Pathology').once( 'value' , function (topicSnap)
+    {
+      dispatch({
+        type:'TOPIC_PULL',
+        payload: topicSnap.val()
+      });
+    })
+  }
+}
+
 export const selectUser = (user) => {
-    console.log('You clicked on user: ', user.first);
     return {
         type: 'USER_SELECTED',
         payload: user
@@ -87,7 +104,6 @@ export const selectUser = (user) => {
 };
 
 export const selectMode = (mode) => {
-    console.log("You clicked on mode: ", mode);
     return {
         type: 'MODE_SELECTED',
         payload: mode
