@@ -4,6 +4,7 @@ var TEXT_START = 'TEXT<'
 var QUESTION_START = 'QUESTION<'
 var QUESTION_END = MINILESSON_END
 var MULTIPLE_CHOICE_START = 'MULTIPLE_CHOICE<'
+var QUESTION_TEXT_END = MULTIPLE_CHOICE_START
 var GRADE_SELF_START = 'GRADE_SELF<'
 var FILL_IN_BLANK_START = 'FILL_IN_BLANK<'
 var COR_ANSWER_START = 'COR_ANSWER<'
@@ -71,12 +72,9 @@ export function extractMiniLessons (wholeString) {
   console.log(typeof(wholeString))
   for (var iMiniLesson = 0; iMiniLesson < minilessonsText.length; iMiniLesson++)
   {
-    console.log('in loop', minilessonsText[iMiniLesson])
     var text = extractFromBarrenTag(TEXT_START, minilessonsText[iMiniLesson]);
     var question = extractFromFertileTag(QUESTION_START, minilessonsText[iMiniLesson]);
-    console.log(question)
-    var questionText = extractFromBarrenTag('', minilessonsText[iMiniLesson]);
-    console.log(questionText)
+    var questionText = extractFromTags(QUESTION_START, QUESTION_TEXT_END, minilessonsText[iMiniLesson])[0];
     var multipleChoice = extractFromBarrenTag(MULTIPLE_CHOICE_START, question) === 'y';
     var gradeSelf = extractFromBarrenTag(GRADE_SELF_START, question) === 'y';
     var fillInBlank = extractFromBarrenTag(FILL_IN_BLANK_START, question) === 'y';

@@ -19,20 +19,27 @@ class GameMode extends Component {
           LEADERBOARD:'unSelectedMode',
           CASES:'selectedMode'
         }
-      default:
+      case 'LEADERBOARD':
         return {
           LEARN:'unSelectedMode',
           LEADERBOARD:'selectedMode',
           CASES:'unSelectedMode'
         }
+      default:
+        return {
+          LEARN:'unSelectedMode',
+          LEADERBOARD:'unSelectedMode',
+          CASES:'unSelectedMode'
+        }
       }
     }
   render() {
+
     var classNames = this.getClassNames(this.props.mode);
     return (
       <div>
-        <a className={classNames.LEARN} onClick={() => this.props.onSelectMode('LEARN')}>LEARN</a>
-        <a className={classNames.LEADERBOARD} onClick={() => this.props.onSelectMode('LEADERBOARD')}>LEADERBOARD</a>
+        <a className={classNames.LEARN} onClick={() => this.props.onSelectMode('LEARN')}>LEARN </a>
+        <a className={classNames.LEADERBOARD} onClick={() => this.props.onSelectMode('LEADERBOARD')}>LEADERBOARD </a>
         <a className={classNames.CASES} onClick={() => this.props.onSelectMode('CASES')}>CASES</a>
       </div>
     )
