@@ -96,10 +96,10 @@ export function getTopicsQuestionsAndScores () {
   }
 }
 
-export const selectUser = (user) => {
+export function selectTopic (topic) {
     return {
-        type: 'USER_SELECTED',
-        payload: user
+        type: 'TOPIC_SELECTED',
+        payload: topic
     }
 };
 
