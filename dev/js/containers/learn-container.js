@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {selectTopic} from '../actions/index'
+import {loadLessons} from '../actions/index'
 import Learn from '../components/learn'
 
 class LearnContainer extends Component {
@@ -20,7 +20,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({selectTopic:selectTopic}, dispatch)
+    return bindActionCreators({selectTopic:loadLessons}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnContainer)

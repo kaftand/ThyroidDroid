@@ -4,6 +4,11 @@ class Learn extends Component {
   constructor(props) {
     super(props)
   }
+  createClickFunction (topic, name, topicSelector) {
+    return function () {
+      topicSelector(topic, name.replace(' ', ''))
+    }
+  }
   buildTopicList (firebaseTopics, topicSelector) {
     var topicList = [];
     for(var iTopic = 0; iTopic < firebaseTopics.length; iTopic++)
@@ -17,12 +22,7 @@ class Learn extends Component {
         {
           partlist.push(
             <li key={iTopicName+iPart} onClick={
-              function() {
-                topicSelector({
-                  topicName:topicName,
-                  part:iPart
-                })
-              }
+              this.createClickFunction(topicName, iPart, topicSelector)
             }
             >{iPart}</li>
           )

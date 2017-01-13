@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+var Parser = require('html-react-parser');
 
 class Lesson extends Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class Lesson extends Component {
     var questionText = []
     for (var i = 0; i<lessons.length; i++)
     {
-      questionText.push(<div key={i}>{lessons[i].text}</div>)
+      questionText.push(Parser('<div key=' + i.toString() + '>' + lessons[i].text + '</div>'))
     }
     return questionText
   }
