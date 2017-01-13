@@ -1,17 +1,19 @@
 import * as firebase from 'firebase';
-import {parseUsername} from '../util'
+import axios from 'axios';
+import {parseUsername, extractLesson} from '../util'
 
-var config = {
+var fbconfig = {
   apiKey: "AIzaSyCo2EkqIecK5DFdiI1rVI2SAJT2EVxOpKU",
   authDomain: "uterine-pathology.firebaseapp.com",
   databaseURL: "https://uterine-pathology.firebaseio.com",
   storageBucket: "uterine-pathology.appspot.com",
   messagingSenderId: "657975423881"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(fbconfig);
 
 const auth = firebase.auth();
 const ref = firebase.database().ref();
+
 
 export const authListen = function () {
 
@@ -84,7 +86,42 @@ export function authSignOut () {
   }
 }
 
-export function getTopicsQuestionsAndScores () {
+export function loadLessons(topic, part) {
+  return dispatch => {
+    firebase.storage().ref().child('/' + topic + '/' + part + '.txt').getDownloadURL().then(
+        function (url){
+          console.log(url)
+        //var instance = axios.create({
+        //   baseURL: url,
+        //   timeout: 1000,
+        //   headers: {
+        //     'Access-Control-Allow-Origin': '*',
+        //     'Access-Control-Allow-Credentials':'true',
+        //     'Access-Control-Allow-Methods':'GET,HEAD,OPTIONS,POST,PUT',
+        //     'Access-Control-Allow-Headers':'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+        //   }
+        // });
+        // console.log(url);
+        // instance.get(url).then(
+        //   function (data) {
+        //     console.log(data)
+        //     var lesson = extractLesson(data)
+        //     dispatch({
+        //       type:'LESSON_LOAD',
+        //       payload:lesson
+        //     });
+        //   }
+        // );
+        var xmlHttp = new XMLHttpRequest();
+xmlHttp.open( "GET", url, false ); // false for synchronous request
+xmlHttp.send( null );
+console.log( xmlHttp.responseText);
+      }
+    );
+  }
+}
+
+export function getTopics () {
   return dispatch => {
     ref.child('Topics').child('Uterine Pathology').once( 'value' , function (topicSnap)
     {
@@ -96,10 +133,36 @@ export function getTopicsQuestionsAndScores () {
   }
 }
 
+export function getCases (username) {
+  return dispatch => {
+    ref.child('Cases').child(username).on( 'value' , function (topicSnap)
+    {
+      dispatch({
+        type:'CASE_PULL',
+        payload: topicSnap.val()
+      });
+    })
+  }
+}
+
 export function selectTopic (topic) {
     return {
         type: 'TOPIC_SELECTED',
         payload: topic
+    }
+};
+
+export function selectCase (topic) {
+    return {
+        type: 'CASE_SELECTED',
+        payload: topic
+    }
+};
+
+export function setLoading (onOrOff) {
+    return {
+        type: 'UPDATE_LOADING',
+        payload: onOrOff
     }
 };
 

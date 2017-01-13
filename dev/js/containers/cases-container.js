@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {loadLessons} from '../actions/index';
 import Cases from '../components/cases'
 
 class CasesContainer extends Component {
@@ -8,8 +9,19 @@ class CasesContainer extends Component {
     super(props)
   }
   render() {
-    return <Cases />
+    return <Cases cases={this.props.cases} selectCase={this.props.selectCase}/>
   }
 }
 
-export default CasesContainer
+function mapStateToProps(state) {
+    return {
+        cases: state.cases,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({selectCase:loadLessons}, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CasesContainer)

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import App from '../components/App';
-import {authListen, getLeaders, getTopicsQuestionsAndScores} from '../actions/index'
+import {authListen, getLeaders, getTopics, getCases, setLoading} from '../actions/index'
 
 
 
@@ -12,11 +12,15 @@ class AppContainer extends Component {
     super(props)
     this.props.authListen()
     this.props.leaderListen()
-    this.props.getTopicsQuestionsAndScores()
+    this.props.getTopics()
   }
   render ()
   {
-    return <App user={this.props.user}/>
+    if (this.props.user)
+    {
+      this.props.getCases(this.props.user.username)
+    }
+    return <App user={this.props.user} loading={this.props.loading}/>
   }
 
 }
@@ -25,13 +29,16 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({
       authListen:authListen,
       leaderListen:getLeaders,
-      getTopicsQuestionsAndScores:getTopicsQuestionsAndScores
+      getTopics:getTopics,
+      getCases:getCases,
+      setLoading:setLoading
     }, dispatch)
 }
 
 function mapStateToProps(state) {
   return {
-    user:state.user
+    user:state.user,
+    loading:state.loading
   }
 }
 

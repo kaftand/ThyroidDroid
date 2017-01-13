@@ -5,6 +5,9 @@ import LoginErrorReducer from './reducers-login-error';
 import LeaderReducer from './reducers-leader';
 import TopicsReducer from './reducers-topics';
 import TopicsPartReducer from './reducers-topicpart'
+import CasesReducer from './reducers-cases'
+import CasesPartReducer from './reducers-casepart'
+import LoadingReducer from './reducers-loading'
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -17,7 +20,10 @@ const allReducers = combineReducers({
     loginError: LoginErrorReducer,
     leaders: LeaderReducer,
     topics: TopicsReducer,
-    topicpart: TopicsPartReducer
+    topicpart: TopicsPartReducer,
+    cases: CasesReducer,
+    casepart: CasesPartReducer,
+    loading: LoadingReducer
 });
 
 export default allReducers
