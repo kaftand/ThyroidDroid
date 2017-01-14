@@ -35,11 +35,11 @@ class Question extends Component {
    }
    else if(this.props.quiz.correct)
    {
-     var answerContent = <CorrectAnswer miniLessonText={miniLesson.miniLessonText}/>
+     var answerContent = <CorrectAnswer miniLessonText={miniLesson.text}/>
    }
    else
    {
-     var answerContent = <IncorrectAnswer miniLessonText={miniLesson.miniLessonText}  correctAnswer={question.correctAnswers[0]}/>
+     var answerContent = <IncorrectAnswer miniLessonText={miniLesson.text}  correctAnswer={question.correctAnswers[0]}/>
    }
    var questionText = question.questionText;
    return (

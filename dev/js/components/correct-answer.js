@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+var Parser = require('html-react-parser');
 
 class CorrectAnswer extends Component
 {
@@ -14,7 +15,7 @@ class CorrectAnswer extends Component
           Nice Job!
         </div>
         <div>
-          {this.props.miniLessonText}
+          {Parser(this.props.miniLessonText)}
         </div>
       </div>
     )
