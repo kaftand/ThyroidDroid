@@ -29,6 +29,7 @@ function mapStateToProps (state) {
     return {
       lesson:state.lesson,
       quiz:state.quiz,
+      username:state.user.username
     }
 }
 

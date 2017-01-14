@@ -6,10 +6,10 @@ class MultipleChoice extends Component
   {
     super(props)
   }
-  answerCallback(correct, lessonNumber, lesson, onAnswer)
+  answerCallback(correct, onAnswer)
   {
     return function () {
-      onAnswer(correct, lessonNumber, lesson)
+      onAnswer(correct)
     }
   }
   randomizeAnswerOrder (lesson, lessonNumber, onAnswer)
@@ -27,7 +27,7 @@ class MultipleChoice extends Component
         answerButtonArray.push(
           <button
           key={iAnswer}
-          onClick={this.answerCallback(true, lessonNumber, lesson, onAnswer)}
+          onClick={this.answerCallback(true,  onAnswer)}
           >{correctAnswer}
           </button>
         )
@@ -38,7 +38,7 @@ class MultipleChoice extends Component
         answerButtonArray.push(
           <button
           key={iAnswer}
-          onClick={this.answerCallback(false, lessonNumber, lesson, onAnswer)}
+          onClick={this.answerCallback(false, onAnswer)}
           >{incorrectAnswers[iIncorrectAnswer]}
           </button>
         );

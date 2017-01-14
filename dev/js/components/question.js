@@ -23,15 +23,25 @@ class Question extends Component {
       return <GradeSelf lesson={lesson} lessonNumber={lessonNumber} onAnswer={onAnswer}/>
     }
   }
+  createQuizAnswer (onAnswer, lesson, lessonNumber, username) {
+    return function (correct) {
+      onAnswer(correct, lessonNumber, lesson, username)
+    }
+  }
   render ()
  {
    console.log(this.props.lesson)
    var miniLesson = this.props.lesson.miniLessons[this.props.quiz.lessonNumber];
+   var onAnswer = this.createQuizAnswer(
+                                        this.props.answeredQuiz,
+                                        this.props.lesson,
+                                        this.props.quiz.lessonNumber,
+                                        this.props.username)
    console.log('miniLesson', miniLesson)
    var question = miniLesson.question;
    if(!this.props.quiz.responded)
    {
-     var answerContent = this.determineQuestionType(question, this.props.answeredQuiz, this.props.lesson, this.props.quiz.lessonNumber);
+     var answerContent = this.determineQuestionType(question, onAnswer, this.props.lesson, this.props.quiz.lessonNumber);
    }
    else if(this.props.quiz.correct)
    {

@@ -13,6 +13,11 @@ class GradeSelf extends Component
     this.state.showAnswer = true;
     this.forceUpdate()
   }
+  createAnswer(correct, onAnswer) {
+    return function () {
+      onAnswer(correct)
+    }
+  }
   render ()
   {
     console.log(this.props)
@@ -21,7 +26,12 @@ class GradeSelf extends Component
 
     if(this.state.showAnswer)
     {
-      return <div>{question.correctAnswers[0]}</div>
+      return (<div>
+                <div>{question.correctAnswers[0]}</div>
+                <button onClick={this.createAnswer(true, this.props.onAnswer)}>Knew It!</button>
+                <button onClick={this.createAnswer(false, this.props.onAnswer)}>Try Again</button>
+              </div>
+              )
     }
     else
     {

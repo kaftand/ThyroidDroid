@@ -20,7 +20,7 @@ class FillInBlank extends Component
         {
           correct = correct || (enteredAnswer.toLowerCase() === correctAnswer[iAnswer].toLowerCase());
         }
-        onAnswer(correct, lesson, lessonNumber);
+        onAnswer(correct);
     }
   }
   render ()

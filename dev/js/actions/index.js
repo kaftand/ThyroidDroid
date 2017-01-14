@@ -176,7 +176,7 @@ export function startQuiz (lessonNumber) {
     }
 }
 
-export function answeredQuiz (correct, lessonNumber, lesson) {
+export function answeredQuiz (correct, lessonNumber, lesson, username) {
     return {
       type: 'QUIZ_ANSWERED',
       payload: {
