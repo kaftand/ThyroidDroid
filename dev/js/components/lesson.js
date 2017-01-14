@@ -10,7 +10,7 @@ class Lesson extends Component {
     var questionText = []
     for (var i = 0; i<lessons.length; i++)
     {
-      questionText.push(Parser('<div key=' + i.toString() + '>' + lessons[i].text + '</div>'))
+      questionText.push(<div key={i}> {Parser(lessons[i].text)} </div>)
     }
     return questionText
   }
