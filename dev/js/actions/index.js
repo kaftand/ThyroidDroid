@@ -100,6 +100,8 @@ export function loadLessons(topic, part) {
             function (data) {
               console.log(data)
               var lesson = extractLesson(data.data)
+              lesson.topic = topic;
+              lesson.part = part;
              dispatch({
                type:'LESSON_LOAD',
                payload:lesson
@@ -162,3 +164,25 @@ export const selectMode = (mode) => {
         payload: mode
     }
 };
+
+export function startQuiz (lessonNumber) {
+    return {
+      type: 'QUIZ_STARTED',
+      payload: {
+        lessonNumber:lessonNumber,
+        responded:false,
+        correct:false
+      }
+    }
+}
+
+export function answeredQuiz (correct, lessonNumber, lesson) {
+    return {
+      type: 'QUIZ_ANSWERED',
+      payload: {
+        lessonNumber:lessonNumber,
+        responded:true,
+        correct:correct
+      }
+    }
+}

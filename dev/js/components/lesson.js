@@ -14,13 +14,22 @@ class Lesson extends Component {
     }
     return questionText
   }
+  createQuizOnClick (randNumber, startQuiz)
+  {
+    return function () {
+      startQuiz(randNumber)
+    }
+  }
   render ()
   {
+
     var lessonText = this.combineMiniLessons(this.props.lesson.miniLessons);
+    var randNumber = Math.floor((Math.random() * this.props.lesson.miniLessons.length));
+    var quizCallback = this.createQuizOnClick (randNumber, this.props.startQuiz);
     return (
       <div>
         {lessonText}
-        <button>Quiz</button>
+        <button onClick={quizCallback}>Quiz</button>
       </div>
     )
   }

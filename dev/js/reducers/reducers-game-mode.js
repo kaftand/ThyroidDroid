@@ -5,7 +5,10 @@ export default function (state='LEADERBOARD', action) {
       return action.payload;
       break;
     case 'LESSON_LOAD':
-      return 'LESSON'
+      return 'LESSON';
+      break;
+    case 'QUIZ_STARTED':
+      return 'QUIZ';
       break;
   }
   return state

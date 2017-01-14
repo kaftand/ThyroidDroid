@@ -3,6 +3,7 @@ import LeaderboardContainer from '../containers/leaderboard-container'
 import LearnContainer from '../containers/learn-container'
 import CasesContainer from '../containers/cases-container'
 import LessonContainer from '../containers/lesson-container'
+import QuestionContainer from '../containers/question-container'
 
 class ContentPane extends Component {
   constructor(props) {
@@ -24,6 +25,10 @@ class ContentPane extends Component {
     else if (this.props.mode === 'LESSON')
     {
       return <LessonContainer />
+    }
+    else if (this.props.mode === 'QUIZ')
+    {
+      return <QuestionContainer />
     }
   }
 }
