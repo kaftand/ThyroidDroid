@@ -7,7 +7,7 @@ class Cases extends Component {
   createClickFunction (name, caseSelector) {
     return function () {
       console.log(name)
-      caseSelector('Cases', name.replace(' ', ''))
+      caseSelector('Cases', name)
     }
   }
   buildCaseList (cases, caseSelector) {

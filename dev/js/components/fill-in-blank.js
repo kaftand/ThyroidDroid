@@ -5,7 +5,7 @@ class FillInBlank extends Component
   constructor (props)
   {
     super(props)
-    state = {
+    this.state = {
       responseText:''
     }
   }
@@ -25,7 +25,7 @@ class FillInBlank extends Component
   }
   render ()
   {
-    var miniLesson = this.props.lesson.miniLesson[this.props.lessonNumber];
+    var miniLesson = this.props.lesson.miniLessons[this.props.lessonNumber];
     var question = miniLesson.question;
     return (
       <div>

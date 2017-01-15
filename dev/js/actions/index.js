@@ -12,7 +12,7 @@ var fbconfig = {
 firebase.initializeApp(fbconfig);
 
 const auth = firebase.auth();
-const ref = firebase.database().ref();
+const dbref = firebase.database().ref();
 
 
 export const authListen = function () {
@@ -88,7 +88,7 @@ export function authSignOut () {
 
 export function loadLessons(topic, part) {
   return dispatch => {
-    firebase.storage().ref().child('/' + topic + '/' + part + '.txt').getDownloadURL().then(
+    firebase.storage().ref().child('/' + topic + '/' + part.replace(' ','') + '.txt').getDownloadURL().then(
         function (url){
           console.log(url)
           var instance = axios.create({
@@ -115,7 +115,7 @@ export function loadLessons(topic, part) {
 
 export function getTopics () {
   return dispatch => {
-    ref.child('Topics').child('Uterine Pathology').once( 'value' , function (topicSnap)
+    dbref.child('Topics').child('Uterine Pathology').once( 'value' , function (topicSnap)
     {
       dispatch({
         type:'TOPIC_PULL',
@@ -127,7 +127,7 @@ export function getTopics () {
 
 export function getCases (username) {
   return dispatch => {
-    ref.child('Cases').child(username).on( 'value' , function (topicSnap)
+    dbref.child('Cases').child(username).on( 'value' , function (topicSnap)
     {
       dispatch({
         type:'CASE_PULL',
@@ -177,6 +177,48 @@ export function startQuiz (lessonNumber) {
 }
 
 export function answeredQuiz (correct, lessonNumber, lesson, username) {
+    if(lesson.topic === 'Cases')
+    {
+      if(correct)
+      {
+        var caseNumber = lesson.part.slice(5);
+        dbref.child(lesson.topic).child(username).child(caseNumber).update({
+          completed:true,
+        })
+      }
+    }
+    else
+    {
+      if(correct)
+      {
+        dbref.child('Questions').child(lesson.topic)
+                                .child(lesson.part.replace(' ',''))
+                                .child(username)
+                                .child('QuestionIDs')
+                                .child(lessonNumber.toString())
+                                .child('Correct').transaction( function(correct) {
+                                  correct++;
+                                  return correct;
+                                })
+      }
+      else
+      {
+        dbref.child('Questions').child(lesson.topic)
+                                .child(lesson.part.replace(' ',''))
+                                .child(username)
+                                .child('QuestionIDs')
+                                .child(lessonNumber.toString())
+                                .child('Incorrect').transaction( function(Incorrect) {
+                                  Incorrect++;
+                                  return Incorrect;
+                                })
+      }
+    }
+    dbref.child('users').child(username).child('totalScore').transaction(
+      function (totalScore) {
+        totalScore++
+        return totalScore
+      });
     return {
       type: 'QUIZ_ANSWERED',
       payload: {

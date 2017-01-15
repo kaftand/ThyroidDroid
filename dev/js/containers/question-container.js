@@ -15,6 +15,7 @@ class QuestionContainer extends Component {
             quiz = {this.props.quiz}
             lesson = {this.props.lesson}
             answeredQuiz = {this.props.answeredQuiz}
+            username = {this.props.username}
             />
   }
 }
