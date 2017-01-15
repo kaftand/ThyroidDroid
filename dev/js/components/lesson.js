@@ -29,6 +29,7 @@ class Lesson extends Component {
     return (
       <div>
         {lessonText}
+        <img src={this.props.lesson.pic}/>
         <button onClick={quizCallback}>Quiz</button>
       </div>
     )

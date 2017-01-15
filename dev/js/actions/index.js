@@ -95,23 +95,37 @@ export function loadLessons(topic, part) {
             baseURL: url,
             timeout: 1000,
           });
-          console.log(url);
           instance.get(url).then(
             function (data) {
               console.log(data)
               var lesson = extractLesson(data.data)
               lesson.topic = topic;
               lesson.part = part;
-             dispatch({
-               type:'LESSON_LOAD',
-               payload:lesson
-             });
+              firebase.storage().ref().child('/' + topic + '/' + part.replace(' ','') + '.png').getDownloadURL().then(
+                function (picUrl)
+                {
+                  lesson.pic = picUrl;
+                  dispatch({
+                   type:'LESSON_LOAD',
+                   payload:lesson
+                 });
+                },
+                function (error)
+                {
+                  lesson.pic = null;
+                  dispatch({
+                   type:'LESSON_LOAD',
+                   payload:lesson
+                 });
+                }
+              );
            }
          );
       }
     );
   }
 }
+
 
 export function getTopics () {
   return dispatch => {
