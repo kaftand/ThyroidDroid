@@ -8,13 +8,21 @@ class NextQuestionButton extends Component
   }
   buttonCallback(setQuestionNumber, qNumber, number)
   {
+
     return function() {
       setQuestionNumber(qNumber, number)
     }
   }
   render ()
   {
-    var callback = this.buttonCallback(this.props.setQuestionNumber, this.props.questionOrder[this.props.questionNumber + 1], this.props.questionNumber + 1);
+    if (this.props.questionNumber + 1 >= this.props.questionOrder.length)
+    {
+      var questionNumber = 0;
+    }
+    else {
+      var questionNumber = this.props.questionNumber+1;
+    }
+    var callback = this.buttonCallback(this.props.setQuestionNumber, this.props.questionOrder[questionNumber], questionNumber);
    return (
     <button onClick={callback}>Next Question</button>)
   }
