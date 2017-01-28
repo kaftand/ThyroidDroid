@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 var Parser = require('html-react-parser');
 
-class CorrectAnswer extends Component
+class IncorrectAnswer extends Component
 {
   constructor (props)
   {
@@ -24,4 +24,4 @@ class CorrectAnswer extends Component
 
 }
 
-export default CorrectAnswer
+export default IncorrectAnswer

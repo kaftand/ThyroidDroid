@@ -4,12 +4,14 @@ import AuthReducer from './reducers-auth';
 import LoginErrorReducer from './reducers-login-error';
 import LeaderReducer from './reducers-leader';
 import TopicsReducer from './reducers-topics';
-import TopicsPartReducer from './reducers-topicpart'
-import CasesReducer from './reducers-cases'
-import CasesPartReducer from './reducers-casepart'
-import LoadingReducer from './reducers-loading'
-import LessonReducer from './reducers-lesson'
-import QuizReducer from './reducers-quiz'
+import TopicsPartReducer from './reducers-topicpart';
+import CasesReducer from './reducers-cases';
+import CasesPartReducer from './reducers-casepart';
+import LoadingReducer from './reducers-loading';
+import LessonReducer from './reducers-lesson';
+import QuizReducer from './reducers-quiz';
+import QuestionOrderReducer from './reducers-question-order';
+import QuestionNumberReducer from './reducers-question-number';
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -27,7 +29,9 @@ const allReducers = combineReducers({
     casepart: CasesPartReducer,
     loading: LoadingReducer,
     lesson: LessonReducer,
-    quiz: QuizReducer
+    quiz: QuizReducer,
+    questionOrder: QuestionOrderReducer,
+    questionNumber: QuestionNumberReducer
 });
 
 export default allReducers

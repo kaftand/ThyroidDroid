@@ -10,6 +10,9 @@ export default function (state=null, action) {
     case 'MODE_SELECTED':
       return null;
       break;
+    case 'NEXT_QUESTION':
+      return action.payload.quiz;
+      break;
   }
   return state
 }

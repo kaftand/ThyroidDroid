@@ -9,13 +9,16 @@ class LessonContainer extends Component {
     super(props)
   }
   render() {
-    return <Lesson lesson={this.props.lesson} startQuiz={this.props.startQuiz}/>
+    return <Lesson lesson={this.props.lesson}
+            questionNumber={this.props.questionNumber}
+            startQuiz={this.props.startQuiz}/>
   }
 }
 
 function mapStateToProps(state) {
     return {
         lesson: state.lesson,
+        questionNumber: state.questionNumber,
     };
 }
 

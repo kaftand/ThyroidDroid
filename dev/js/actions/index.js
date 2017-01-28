@@ -101,6 +101,8 @@ export function loadLessons(topic, part) {
               var lesson = extractLesson(data.data)
               lesson.topic = topic;
               lesson.part = part;
+              lesson.questionOrder = orderQuiz(lesson.miniLessons.length)
+              console.log(lesson)
               firebase.storage().ref().child('/' + topic + '/' + part.replace(' ','') + '.png').getDownloadURL().then(
                 function (picUrl)
                 {
@@ -188,6 +190,35 @@ export function startQuiz (lessonNumber) {
         correct:false
       }
     }
+}
+
+export function orderQuiz (nQuestions) {
+    var questionOrdered = [];
+    for (var i = 0; i< nQuestions; i++)
+    {
+      questionOrdered.push(i);
+    }
+    var randomizedOrder = [];
+    while(questionOrdered.length > 0)
+    {
+      var randomNum = Math.floor((Math.random() * questionOrdered.length ));
+      randomizedOrder.push(questionOrdered.splice(randomNum,1)[0]);
+    }
+    return randomizedOrder
+}
+
+export function setQuestionNumber(qNumber, number) {
+      return {
+        type: 'NEXT_QUESTION',
+        payload: {
+          quiz:{
+            correct:false,
+            lessonNumber:qNumber,
+            responded:false
+          },
+          number:number
+        }
+      }
 }
 
 export function answeredQuiz (correct, lessonNumber, lesson, username) {

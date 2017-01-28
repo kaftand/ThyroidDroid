@@ -4,6 +4,7 @@ import FillInBlank from './fill-in-blank'
 import GradeSelf from './grade-self'
 import CorrectAnswer from './correct-answer'
 import IncorrectAnswer from './incorrect-answer'
+import NextQuestionButtonContainer from '../containers/next-question-button-container'
 
 class Question extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Question extends Component {
   }
   render ()
  {
-   console.log(this.props.lesson)
+   console.log(this.props.quiz.lessonNumber)
    var miniLesson = this.props.lesson.miniLessons[this.props.quiz.lessonNumber];
    var onAnswer = this.createQuizAnswer(
                                         this.props.answeredQuiz,
@@ -45,11 +46,18 @@ class Question extends Component {
    }
    else if(this.props.quiz.correct)
    {
-     var answerContent = <CorrectAnswer miniLessonText={miniLesson.text}/>
+     var answerContent = (<div>
+                            <CorrectAnswer miniLessonText={miniLesson.text}/>
+                            <NextQuestionButtonContainer />
+                          </div>)
+
    }
    else
    {
-     var answerContent = <IncorrectAnswer miniLessonText={miniLesson.text}  correctAnswer={question.correctAnswers[0]}/>
+     var answerContent = (<div>
+                            <IncorrectAnswer miniLessonText={miniLesson.text}  correctAnswer={question.correctAnswers[0]}/>
+                            <NextQuestionButtonContainer />
+                          </div>)
    }
    var questionText = question.questionText;
    return (
