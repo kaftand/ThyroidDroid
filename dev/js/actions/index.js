@@ -239,14 +239,42 @@ export function getTopics (username) {
 
 export function getCases (username) {
   return dispatch => {
-    dbref.child('Cases').child(username).on( 'value' , function (topicSnap)
+    dbref.child('Cases').on( 'value' , function (caseSnap)
     {
-      dispatch({
-        type:'CASE_PULL',
-        payload: topicSnap.val()
-      });
+      console.log(caseSnap.val())
+      var cases = caseSnap.val();
+      var usercases = cases[username]
+      if (!usercases)
+      {
+        var casesWithName = buildCasesFromScratch(username)
+        cases[username] = casesWithName[username]
+        dbref.child('Cases').update(cases).then( function() {
+          dispatch({
+            type:'CASE_PULL',
+            payload: cases[username]
+          })
+        })
+      } else {
+        dispatch({
+          type:'CASE_PULL',
+          payload: usercases
+        })
+      }
     })
   }
+}
+
+function buildCasesFromScratch(username) {
+  var cases = new Object();
+  cases[username] = [];
+  for (var i = 0; i < 10; i++)
+  {
+    cases[username].push({
+      caseName:"Case " + (i+1).toString(),
+      completed:false
+    })
+  }
+  return cases
 }
 
 export function selectTopic (topic) {
