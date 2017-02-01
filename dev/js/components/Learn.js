@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {lessonStyles} from '../styles';
 
 class Learn extends Component {
   constructor(props) {
@@ -20,15 +21,24 @@ class Learn extends Component {
         var partlist = [];
         for (var iPart in thisTopic[iTopicName])
         {
+          if(thisTopic[iTopicName][iPart])
+          {
+            var thisPartStyle = lessonStyles.graduated;
+          } else {
+            var thisPartStyle = lessonStyles.notGraduated;
+          }
           partlist.push(
-            <li key={iTopicName+iPart} onClick={
+            <li style={thisPartStyle} key={iTopicName+iPart} onClick={
               this.createClickFunction(topicName, iPart, topicSelector)
             }
             >{iPart}</li>
           )
         }
         topicList.push(
-          <ul key={iTopicName}>{topicName}{partlist}</ul>
+          <div key={iTopicName}>
+            <h2 style={lessonStyles.header}>{topicName}</h2>
+            <ul style={lessonStyles.container}>{partlist}</ul>
+          </div>
         )
       }
     }

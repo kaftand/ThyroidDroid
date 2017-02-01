@@ -66,3 +66,65 @@ export const leaderboardStyles = {
     color: 'black'
   }
 }
+
+
+export const lessonStyles = {
+    header: {
+      color:'grey',
+      textAlign:'center'
+    },
+    container:
+    {
+      padding: 0,
+      textAlign:'center'
+    },
+    graduated:
+    {
+      listStyleType: 'none',
+      display: 'inline-block',
+      padding: '10px',
+      border: '2px',
+      borderRadius: '5px',
+      margin: '5px',
+      cursor: 'pointer',
+      color: UNMCWhite,
+      background:UNMCRed
+    },
+    notGraduated:{
+      listStyleType: 'none',
+      display: 'inline-block',
+      padding: '10px',
+      border: '2px',
+      borderRadius: '5px',
+      margin: '5px',
+      cursor: 'pointer',
+      color: UNMCWhite,
+      background:'lightgrey'
+    }
+}
+
+export const caseStyles = {
+  graduated:
+  {
+    listStyleType: 'none',
+    display: 'block',
+    padding: '10px',
+    border: '2px',
+    borderRadius: '5px',
+    margin: '5px',
+    cursor: 'pointer',
+    color: UNMCWhite,
+    background:UNMCRed
+  },
+  notGraduated:{
+    listStyleType: 'none',
+    display: 'block',
+    padding: '10px',
+    border: '2px',
+    borderRadius: '5px',
+    margin: '5px',
+    cursor: 'pointer',
+    color: UNMCWhite,
+    background:'lightgrey'
+  }
+}
