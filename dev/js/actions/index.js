@@ -51,6 +51,10 @@ export function trackGrad (username)
             {
               var thisPart = thisTopic[iPart];
               var iGraduated = true;
+              if(!thisPart[username])
+              {
+                continue;
+              }
               var userQuestion = thisPart[username].QuestionIDs
               for (var iQuestion = 0; iQuestion < userQuestion.length; iQuestion++)
               {
@@ -326,34 +330,59 @@ export function answeredQuiz (correct, lessonNumber, lesson, username) {
     }
     else
     {
-      if(correct)
-      {
-        dbref.child('Questions').child(lesson.topic)
-                                .child(lesson.part.replace(' ',''))
-                                .child(username)
-                                .child('QuestionIDs')
-                                .child(lessonNumber.toString())
-                                .child('Correct').transaction( function(correct) {
-                                  correct++;
-                                  return correct;
-                                })
-      }
-      else
-      {
-        dbref.child('Questions').child(lesson.topic)
-                                .child(lesson.part.replace(' ',''))
-                                .child(username)
-                                .child('QuestionIDs')
-                                .child(lessonNumber.toString())
-                                .child('Incorrect').transaction( function(Incorrect) {
-                                  Incorrect++;
-                                  return Incorrect;
-                                })
-      }
+      dbref.child('Questions').child(lesson.topic)
+                              .child(lesson.part.replace(' ',''))
+                              .once('value', function (snapshot) {
+        var thisPart = snapshot.val();
+        if(!thisPart[username])
+        {
+          var numQuestions = lesson.miniLessons.length;
+          var QuestionIDs = [];
+          thisPart[username] = new Object();
+          for (var iQuestion = 0; iQuestion < numQuestions; iQuestion++)
+          {
+            QuestionIDs.push({
+              Correct:0,
+              Incorrect:0
+            })
+          }
+          QuestionIDs[lessonNumber].Correct =+correct;
+          QuestionIDs[lessonNumber].Incorrect =+(!correct);
+          thisPart[username].QuestionIDs = QuestionIDs;
+          dbref.child('Questions').child(lesson.topic)
+                                  .child(lesson.part.replace(' ',''))
+                                  .update(thisPart);
+          return
+        }
+        if(correct)
+        {
+          dbref.child('Questions').child(lesson.topic)
+                                  .child(lesson.part.replace(' ',''))
+                                  .child(username)
+                                  .child('QuestionIDs')
+                                  .child(lessonNumber.toString())
+                                  .child('Correct').transaction( function(correct) {
+                                    correct++;
+                                    return correct;
+                                  })
+        }
+        else
+        {
+          dbref.child('Questions').child(lesson.topic)
+                                  .child(lesson.part.replace(' ',''))
+                                  .child(username)
+                                  .child('QuestionIDs')
+                                  .child(lessonNumber.toString())
+                                  .child('Incorrect').transaction( function(Incorrect) {
+                                    Incorrect++;
+                                    return Incorrect;
+                                  })
+        }
+      })
     }
     dbref.child('users').child(username).child('totalScore').transaction(
       function (totalScore) {
-        totalScore++
+        totalScore+= correct;
         return totalScore
       });
     return {

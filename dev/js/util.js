@@ -1,5 +1,6 @@
 var MINILESSON_START = 'MINI_LESSON<'
 var MINILESSON_END = 'MINI_LESSON/>'
+var LASTMINILESSON = 'LAST_MINI_LESSON/>'
 var TEXT_START = 'TEXT<'
 var QUESTION_START = 'QUESTION<'
 var QUESTION_END = MINILESSON_END
@@ -110,8 +111,7 @@ export function extractMiniLessons (wholeString) {
 }
 
 export function extractFromTags (startTag, endTag, a) {
-  console.log('asdf')
-  var result = [], m, rx = new RegExp(startTag + '(.*?)' + endTag,'g');
+  var result = [], m, rx = new RegExp(startTag + '(.*?)(' + endTag + '|' + LASTMINILESSON + ')' ,'g');
   while ((m=rx.exec(a)) !== null) {
     result.push(m[1]);
   }
