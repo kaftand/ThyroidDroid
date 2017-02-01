@@ -14,7 +14,6 @@ class LoggedInView extends Component
   {
    return (
     <div>
-      <h2>Thyroid</h2>
       <LogOutContainer/>
       <GameModeContainer />
       <ContentPaneContainer />

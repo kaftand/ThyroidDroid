@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import {loginStyles} from '../styles'
 
 class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      emailBox:<input type='text' id='email' placeholder='email' onChange={this.handleEmailChange.bind(this)}/> ,
-      passwordBox:<input type='password' id='password' placeholder='password' onChange={this.handlePasswordChange.bind(this)}/>,
+      emailBox:<input style={loginStyles.form} type='text' id='email' placeholder='email' onChange={this.handleEmailChange.bind(this)}/> ,
+      passwordBox:<input style={loginStyles.form} type='password' id='password' placeholder='password' onChange={this.handlePasswordChange.bind(this)}/>,
       emailValue:'',
       passwordValue:''
     }
@@ -33,8 +34,8 @@ class Login extends Component {
      <div>
       {this.state.emailBox}
       {this.state.passwordBox}
-      <button type="button" className="btn btn-secondary" onClick={this.loginCallback.bind(this)}>SIGN IN</button>
-      <button type="button" className="btn btn-secondary" onClick={this.registerCallback.bind(this)}>REGISTER</button>
+      <button type="button" style={loginStyles.SignIn} onClick={this.loginCallback.bind(this)}>SIGN IN</button>
+      <button type="button" style={loginStyles.SignIn} onClick={this.registerCallback.bind(this)}>REGISTER</button>
      </div>
       )
     }
@@ -44,9 +45,9 @@ class Login extends Component {
       <div>
        {this.state.emailBox}
        {this.state.passwordBox}
-       <button type="button" className="btn btn-secondary" onClick={this.loginCallback.bind(this)}>SIGN IN</button>
-       <button type="button" className="btn btn-secondary" onClick={this.registerCallback.bind(this)}>REGISTER</button>
-       <div>{this.props.error}</div>
+       <button type="button" style={loginStyles.SignIn}  className="btn btn-secondary" onClick={this.loginCallback.bind(this)}>SIGN IN</button>
+       <button type="button" style={loginStyles.SignIn} className="btn btn-secondary" onClick={this.registerCallback.bind(this)}>REGISTER</button>
+       <div style={loginStyles.error}>{this.props.error}</div>
       </div>
      )
    }

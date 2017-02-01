@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {gameModeStyles} from '../styles'
 
 
 class GameMode extends Component {
@@ -9,38 +10,38 @@ class GameMode extends Component {
     switch(mode) {
       case 'LEARN':
         return {
-          LEARN:'selectedMode',
-          LEADERBOARD:'unSelectedMode',
-          CASES:'unSelectedMode'
+          LEARN:gameModeStyles.selected,
+          LEADERBOARD:gameModeStyles.unselected,
+          CASES:gameModeStyles.unselected
         }
       case 'CASES':
         return {
-          LEARN:'unSelectedMode',
-          LEADERBOARD:'unSelectedMode',
-          CASES:'selectedMode'
+          LEARN:gameModeStyles.unselected,
+          LEADERBOARD:gameModeStyles.unselected,
+          CASES:gameModeStyles.selected
         }
       case 'LEADERBOARD':
         return {
-          LEARN:'unSelectedMode',
-          LEADERBOARD:'selectedMode',
-          CASES:'unSelectedMode'
+          LEARN:gameModeStyles.unselected,
+          LEADERBOARD:gameModeStyles.selected,
+          CASES:gameModeStyles.unselected
         }
       default:
         return {
-          LEARN:'unSelectedMode',
-          LEADERBOARD:'unSelectedMode',
-          CASES:'unSelectedMode'
+          LEARN:gameModeStyles.unselected,
+          LEADERBOARD:gameModeStyles.unselected,
+          CASES:gameModeStyles.unselected
         }
       }
     }
   render() {
 
-    var classNames = this.getClassNames(this.props.mode);
+    var styles = this.getClassNames(this.props.mode);
     return (
-      <div>
-        <a className={classNames.LEARN} onClick={() => this.props.onSelectMode('LEARN')}>LEARN </a>
-        <a className={classNames.LEADERBOARD} onClick={() => this.props.onSelectMode('LEADERBOARD')}>LEADERBOARD </a>
-        <a className={classNames.CASES} onClick={() => this.props.onSelectMode('CASES')}>CASES</a>
+      <div style={gameModeStyles.container}>
+        <a href='#' style={styles.LEARN} onClick={() => this.props.onSelectMode('LEARN')}>LEARN </a>
+        <a href='#' style={styles.LEADERBOARD} onClick={() => this.props.onSelectMode('LEADERBOARD')}>LEADERBOARD </a>
+        <a href='#' style={styles.CASES} onClick={() => this.props.onSelectMode('CASES')}>CASES</a>
       </div>
     )
   }
