@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {fillInBlankStyles} from '../styles'
 
 class FillInBlank extends Component
 {
@@ -33,7 +34,7 @@ class FillInBlank extends Component
     var miniLesson = this.props.lesson.miniLessons[this.props.lessonNumber];
     var question = miniLesson.question;
     return (
-      <div>
+      <div style={fillInBlankStyles}>
         <input type='text' id='answer' placeholder='answer' onChange={this.handleAnswerChange.bind(this)}/>
         <button
           onClick={this.createGrader(this.props.onAnswer, question.correctAnswers, this.props.lesson, this.props.lessonNumber)}

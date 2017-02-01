@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {multipleChoiceStyles} from '../styles'
 
 class MultipleChoice extends Component
 {
@@ -25,7 +26,7 @@ class MultipleChoice extends Component
       if(Math.random() < increasingProbs[iAnswer])
       {
         answerButtonArray.push(
-          <button
+          <button style={multipleChoiceStyles}
           key={iAnswer}
           onClick={this.answerCallback(true,  onAnswer)}
           >{correctAnswer}
@@ -36,7 +37,7 @@ class MultipleChoice extends Component
       else
       {
         answerButtonArray.push(
-          <button
+          <button style={multipleChoiceStyles}
           key={iAnswer}
           onClick={this.answerCallback(false, onAnswer)}
           >{incorrectAnswers[iIncorrectAnswer]}

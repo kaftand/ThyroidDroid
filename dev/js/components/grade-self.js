@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {multipleChoiceStyles} from '../styles'
 
 class GradeSelf extends Component
 {
@@ -28,8 +29,8 @@ class GradeSelf extends Component
     {
       return (<div>
                 <div>{question.correctAnswers[0]}</div>
-                <button onClick={this.createAnswer(true, this.props.onAnswer)}>Knew It!</button>
-                <button onClick={this.createAnswer(false, this.props.onAnswer)}>Try Again</button>
+                <button style={multipleChoiceStyles} onClick={this.createAnswer(true, this.props.onAnswer)}>Knew It!</button>
+                <button style={multipleChoiceStyles} onClick={this.createAnswer(false, this.props.onAnswer)}>Try Again</button>
               </div>
               )
     }

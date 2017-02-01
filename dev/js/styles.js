@@ -131,3 +131,45 @@ export const caseStyles = {
     textAlign:'center'
   }
 }
+
+export const lessonPanelStyles = {
+  text:{
+    paddingTop:"20px",
+    paddingBottom:"20px"
+  },
+  picture:{
+    display: 'block',
+    margin: 'auto',
+  },
+  quizButton:{
+    display:'block',
+    width:'100%'
+  }
+}
+
+export const multipleChoiceStyles = {
+    display: 'block',
+    margin: 'auto',
+    padding: '10px',
+    border: '2px',
+    borderRadius: '5px',
+    margin: '5px',
+    width:'100%'
+}
+
+export const fillInBlankStyles = {
+  display: 'block',
+  margin: 'auto',
+  textAlign:'center'
+}
+
+export const questionStyles = {
+  question:{
+    paddingTop:'20px',
+    paddingBottom:'20px',
+    textAlign:'center'
+  },
+  answer:{
+
+  }
+}

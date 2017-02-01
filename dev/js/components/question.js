@@ -5,6 +5,7 @@ import GradeSelf from './grade-self'
 import CorrectAnswer from './correct-answer'
 import IncorrectAnswer from './incorrect-answer'
 import NextQuestionButtonContainer from '../containers/next-question-button-container'
+import {questionStyles} from '../styles'
 
 class Question extends Component {
   constructor(props) {
@@ -31,14 +32,12 @@ class Question extends Component {
   }
   render ()
  {
-   console.log(this.props.quiz.lessonNumber)
    var miniLesson = this.props.lesson.miniLessons[this.props.quiz.lessonNumber];
    var onAnswer = this.createQuizAnswer(
                                         this.props.answeredQuiz,
                                         this.props.lesson,
                                         this.props.quiz.lessonNumber,
                                         this.props.username)
-   console.log('miniLesson', miniLesson)
    var question = miniLesson.question;
    if(!this.props.quiz.responded)
    {
@@ -62,10 +61,10 @@ class Question extends Component {
    var questionText = question.questionText;
    return (
      <div>
-       <div>
+       <div style={questionStyles.question}>
         {questionText}
        </div>
-       <div>
+       <div style={questionStyles.answer}>
         {answerContent}
        </div>
       </div>

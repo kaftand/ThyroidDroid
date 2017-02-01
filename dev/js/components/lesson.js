@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {lessonPanelStyles} from '../styles'
 var Parser = require('html-react-parser');
 
 class Lesson extends Component {
@@ -29,9 +30,9 @@ class Lesson extends Component {
     var quizCallback = this.createQuizOnClick (this.props.lesson.questionOrder[this.props.questionNumber], this.props.startQuiz);
     return (
       <div>
-        {lessonText}
-        <img src={this.props.lesson.pic}/>
-        <button onClick={quizCallback}>Quiz</button>
+        <div style={lessonPanelStyles.text}>{lessonText}</div>
+        <img style={lessonPanelStyles.picture} src={this.props.lesson.pic}/>
+        <button style={lessonPanelStyles.quizButton} onClick={quizCallback}>Quiz</button>
       </div>
     )
   }

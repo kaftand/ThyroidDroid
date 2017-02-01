@@ -13,7 +13,7 @@ class IncorrectAnswer extends Component
       <div>
         <div>
           Nice Try! The correct answer was:
-          {this.props.correctAnswer}
+          {' ' + this.props.correctAnswer}
         </div>
         <div>
           {Parser(this.props.miniLessonText)}
