@@ -22,18 +22,16 @@ class Leaderboard extends Component {
     }
     return leaderList
   }
-  getYourScore (leaders, username)
-  {
-    if(!leaders)
-    {
-      return '';
-    }
-    return leaders[username].totalScore.toString()
-  }
   render ()
  {
    var leaderElements = this.createLeaderElements(this.props.leaders);
-   var yourScore = this.getYourScore(this.props.leaders, this.props.username)
+   if (!this.props.user)
+   {
+     var yourScore = ''
+   }
+   else {
+     var yourScore = this.props.user.totalScore;
+   }
    return ( <div>
               <img style={leaderboardStyles.logo} src={'./ic_thyroidlogoBig.png'} />
               <ul style={leaderboardStyles.listContainer}>

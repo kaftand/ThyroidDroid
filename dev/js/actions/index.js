@@ -26,8 +26,29 @@ export const authListen = function () {
          if(user)
          {
            user.username=parseUsername(user.email)
+           dbref.child('users').on ('value', function(snapshot){
+              var dbUsers = snapshot.val();
+              var ourUser = dbUsers[user.username];
+              if (!ourUser)
+              {
+                ourUser = {
+                  email:user.email,
+                  totalScore:0,
+                  username:user.username
+                }
+                dbUsers[user.username] = ourUser;
+                dbref.child('users').update(dbUsers)
+                return
+              }
+              console.log('dbusers ', dbUsers)
+              user.totalScore = ourUser.totalScore;
+              dispatch({type: 'AUTH_CHANGE', payload: user})
+           })
+         } else
+         {
+           dispatch({type: 'AUTH_CHANGE', payload: user})
          }
-         dispatch({type: 'AUTH_CHANGE', payload: user})
+
  });
  }
 }
