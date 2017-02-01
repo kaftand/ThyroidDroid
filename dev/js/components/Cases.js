@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {caseStyles} from '../styles';
 
 class Cases extends Component {
   constructor(props) {
@@ -20,11 +21,19 @@ class Cases extends Component {
       functionList.push(
         this.createClickFunction(name, caseSelector)
       )
+      if (thisCase.completed)
+      {
+        var thisStyle = caseStyles.graduated;
+      } else {
+        var thisStyle = caseStyles.notGraduated;
+      }
       caseList.push(
-        <li key={iCase} onClick={
-          functionList[iCase]
-        }
-        >{name}</li>
+        <div key={iCase}>
+          <li style={thisStyle} key={iCase} onClick={
+            functionList[iCase]
+          }
+          >{name}</li>
+        </div>
       )
     }
     return caseList;
@@ -39,7 +48,7 @@ class Cases extends Component {
   {
     caseList = <div>Loading...</div>
   }
-   return <ul>{caseList}</ul>
+   return <ul style={caseStyles.container}>{caseList}</ul>
   }
 }
 

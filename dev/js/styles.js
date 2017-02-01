@@ -107,7 +107,7 @@ export const caseStyles = {
   graduated:
   {
     listStyleType: 'none',
-    display: 'block',
+    display: 'table',
     padding: '10px',
     border: '2px',
     borderRadius: '5px',
@@ -118,7 +118,7 @@ export const caseStyles = {
   },
   notGraduated:{
     listStyleType: 'none',
-    display: 'block',
+    display: 'inline-block',
     padding: '10px',
     border: '2px',
     borderRadius: '5px',
@@ -126,5 +126,8 @@ export const caseStyles = {
     cursor: 'pointer',
     color: UNMCWhite,
     background:'lightgrey'
+  },
+  container:{
+    textAlign:'center'
   }
 }
