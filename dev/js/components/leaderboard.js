@@ -34,14 +34,16 @@ class Leaderboard extends Component {
  {
    var leaderElements = this.createLeaderElements(this.props.leaders);
    var yourScore = this.getYourScore(this.props.leaders, this.props.username)
-   return (
-            <ul style={leaderboardStyles.listContainer}>
-              <h2 style={leaderboardStyles.header}>Top Scores</h2>
-              {leaderElements}
-              <li style={leaderboardStyles.yourScore}>
-                {'Your Score: ' + yourScore}
-              </li>
-            </ul>
+   return ( <div>
+              <img style={leaderboardStyles.logo} src={'./ic_thyroidlogoBig.png'} />
+              <ul style={leaderboardStyles.listContainer}>
+                <h2 style={leaderboardStyles.header}>Top Scores</h2>
+                {leaderElements}
+                <li style={leaderboardStyles.yourScore}>
+                  {'Your Score: ' + yourScore}
+                </li>
+              </ul>
+            </div>
           )
  }
 }

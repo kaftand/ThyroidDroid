@@ -53,6 +53,7 @@ export const leaderboardStyles = {
     fontSize: 'auto',
     color: 'black',
     textAlign:'center',
+    padding:0
   },
   listItem:{
     listStyleType: 'none',
@@ -64,6 +65,10 @@ export const leaderboardStyles = {
   },
   header:{
     color: 'black'
+  },
+  logo:{
+    display: 'block',
+    margin: 'auto',
   }
 }
 
