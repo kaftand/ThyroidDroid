@@ -45,3 +45,24 @@ export const gameModeStyles = {
     margin: 'auto',
   }
 }
+
+export const leaderboardStyles = {
+  listContainer:{
+    display:'block',
+    margin: 'auto',
+    fontSize: 'auto',
+    color: 'black',
+    textAlign:'center',
+  },
+  listItem:{
+    listStyleType: 'none',
+    color: UNMCRed
+  },
+  yourScore:{
+    listStyleType: 'none',
+    color: 'black'
+  },
+  header:{
+    color: 'black'
+  }
+}

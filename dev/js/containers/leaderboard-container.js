@@ -10,13 +10,14 @@ class LeaderboardContainer extends Component {
   }
   render() {
     console.log(this.props.leaders)
-    return <Leaderboard leaders={this.props.leaders}/>
+    return <Leaderboard leaders={this.props.leaders} username={this.props.username}/>
   }
 }
 
 function mapStateToProps(state) {
     return {
         leaders: state.leaders,
+        username: state.user.username
     };
 }
 export default connect(mapStateToProps)(LeaderboardContainer)
