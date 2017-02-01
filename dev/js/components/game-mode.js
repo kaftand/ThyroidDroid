@@ -37,6 +37,7 @@ class GameMode extends Component {
   render() {
 
     var styles = this.getClassNames(this.props.mode);
+    console.log('style', styles)
     return (
       <div style={gameModeStyles.container}>
         <a href='#' style={styles.LEARN} onClick={() => this.props.onSelectMode('LEARN')}>LEARN </a>

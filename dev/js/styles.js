@@ -26,16 +26,22 @@ export const loginStyles = {
 }
 
 export const gameModeStyles = {
-  selectedMode:{
-    margin: 'auto',
-    textAlign: 'justify'
+  selected:{
+    color:'black',
+    display:'table-cell',
+    textDecoration: 'none',
+    textAlign:'center',
+    borderBottom: 'medium solid' + UNMCGreen,
   },
-  unSelectedMode:{
-    margin: 'auto',
-    display: 'inline-block'
+  unselected:{
+    color:'grey',
+    display:'table-cell',
+    textDecoration: 'none',
+    textAlign:'center'
   },
   container:{
     width:'100%',
-    display: 'inline-block'
+    display: 'table',
+    margin: 'auto',
   }
 }
