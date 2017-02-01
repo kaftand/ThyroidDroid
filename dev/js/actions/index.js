@@ -32,6 +32,43 @@ export const authListen = function () {
  }
 }
 
+export function trackGrad (username)
+{
+  firebase.database().ref().child('Questions').on('value', function(questionsSnapShot)
+  {
+    firebase.database().ref().child('Graduated').child(username).once('value', function(graduatedSnapShot)
+    {
+      var questions = questionsSnapShot.val();
+      var graduated = graduatedSnapShot.val();
+      for (var iTopic in questions)
+      {
+        if (questions.hasOwnProperty(iTopic))
+        {
+          var thisTopic = questions[iTopic];
+          for (var iPart in thisTopic)
+          {
+            if (thisTopic.hasOwnProperty(iPart))
+            {
+              var thisPart = thisTopic[iPart];
+              var iGraduated = true;
+              var userQuestion = thisPart[username].QuestionIDs
+              for (var iQuestion = 0; iQuestion < userQuestion.length; iQuestion++)
+              {
+                iGraduated = iGraduated & (userQuestion[iQuestion].Correct>userQuestion[iQuestion].Incorrect);
+              }
+              if(iGraduated)
+              {
+                graduated[iTopic][iPart] = true;
+              }
+            }
+          }
+        }
+      }
+      firebase.database().ref().child('Graduated').child(username).update(graduated);
+    })
+  })
+}
+
 export function authSignIn (username, password) {
   if(!username)
   {
@@ -174,7 +211,6 @@ export function getTopics (username) {
                   {
                     topicsToPost[topicName] = new Object();
                   }
-                  console.log('grad is null?', graduated, topicName)
                   graduated[topicName][partNameDeblanked] = false;
                   topicsToPost[topicName][partNameDeblanked] = false;
                 }

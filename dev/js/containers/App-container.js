@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import App from '../components/App';
-import {authListen, getLeaders, getTopics, getCases, setLoading, getGraduationList} from '../actions/index'
+import {authListen, getLeaders, getTopics, getCases, setLoading, getGraduationList, trackGrad} from '../actions/index'
 
 
 
@@ -20,6 +20,7 @@ class AppContainer extends Component {
     {
       this.props.getTopics(this.props.user.username)
       this.props.getCases(this.props.user.username)
+      trackGrad(this.props.user.username)
       if (this.props.topics)
       {
         //this.props.getGraduationList(this.props.user.username, this.props.topics)
