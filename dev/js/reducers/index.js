@@ -12,6 +12,7 @@ import LessonReducer from './reducers-lesson';
 import QuizReducer from './reducers-quiz';
 import QuestionOrderReducer from './reducers-question-order';
 import QuestionNumberReducer from './reducers-question-number';
+import GraduatedListReducer from './reducers-graduated'
 
 /*
  * We combine all reducers into a single object before updated data is dispatched (sent) to store
@@ -31,7 +32,8 @@ const allReducers = combineReducers({
     lesson: LessonReducer,
     quiz: QuizReducer,
     questionOrder: QuestionOrderReducer,
-    questionNumber: QuestionNumberReducer
+    questionNumber: QuestionNumberReducer,
+    graduatedList: GraduatedListReducer
 });
 
 export default allReducers

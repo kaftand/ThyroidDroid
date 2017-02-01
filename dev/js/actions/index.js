@@ -79,6 +79,19 @@ export function getLeaders()
   }
 }
 
+export function getGraduationList(username, topics)
+{
+  return dispatch => {
+    firebase.database().ref().child("Graduated").child(username).on("value", snapshot => {
+      dispatch({
+        type:'GRADUATED_LIST_UPDATE',
+        payload: snapshot.val()
+      })
+    })
+  }
+}
+
+
 export function authSignOut () {
   return dispatch => {
     console.log('hit signout')
@@ -129,14 +142,57 @@ export function loadLessons(topic, part) {
 }
 
 
-export function getTopics () {
+export function getTopics (username) {
   return dispatch => {
-    dbref.child('Topics').child('Uterine Pathology').once( 'value' , function (topicSnap)
+    dbref.child('Topics').child('Uterine Pathology').on( 'value' , topicSnap =>
     {
-      dispatch({
-        type:'TOPIC_PULL',
-        payload: topicSnap.val()
-      });
+      firebase.database().ref().child("Graduated").child(username).on("value", snapshot => {
+        var topics = topicSnap.val();
+        var graduated = snapshot.val();
+        if (!graduated)
+        {
+          graduated = new Object();
+        }
+        var topicsToPost = new Object();
+        for(var iTopic = 0; iTopic < topics.length; iTopic++)
+        {
+          for (var topicName in topics[iTopic])
+          {
+            if (topics[iTopic].hasOwnProperty(topicName))
+            {
+              for (var partName in topics[iTopic][topicName])
+              {
+                if(!graduated[topicName])
+                {
+                  graduated[topicName] = new Object();
+                  topicsToPost[topicName] = new Object();
+                }
+                var partNameDeblanked = partName.replace(' ','');
+                if(typeof(graduated[topicName][partNameDeblanked]) == "undefined")
+                {
+                  if(!topicsToPost[topicName])
+                  {
+                    topicsToPost[topicName] = new Object();
+                  }
+                  console.log('grad is null?', graduated, topicName)
+                  graduated[topicName][partNameDeblanked] = false;
+                  topicsToPost[topicName][partNameDeblanked] = false;
+                }
+                topics[iTopic][topicName][partName] = graduated[topicName][partNameDeblanked];
+              }
+            }
+          }
+        }
+        if (!isEmpty(topicsToPost))
+        {
+          console.log(topicsToPost)
+          firebase.database().ref().child("Graduated").child(username).update(topicsToPost);
+        }
+        dispatch({
+          type:'TOPIC_PULL',
+          payload: topics
+        })
+      })
     })
   }
 }
@@ -272,4 +328,14 @@ export function answeredQuiz (correct, lessonNumber, lesson, username) {
         correct:correct
       }
     }
+}
+
+function isEmpty(obj) {
+    for (var key in obj) {
+      if (hasOwnProperty.call(obj, key))
+      {
+        return false;
+      }
+    }
+  return true;
 }
