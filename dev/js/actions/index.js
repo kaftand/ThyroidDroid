@@ -237,7 +237,7 @@ export function getTopics (username) {
                     topicsToPost[topicName] = new Object();
                   }
                   graduated[topicName][partNameDeblanked] = false;
-                  topicsToPost[topicName][partNameDeblanked] = false;
+                  topicsToPost[topicName] = graduated[topicName];
                 }
                 topics[iTopic][topicName][partName] = graduated[topicName][partNameDeblanked];
               }
