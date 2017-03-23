@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {endOfQuestionButtonStyles} from '../styles';
 
 class BackToListButton extends Component
 {
@@ -17,7 +18,7 @@ class BackToListButton extends Component
   {
     var callback = this.buttonCallback(this.props.selectMode, this.props.listType);
     return (
-      <button onClick={callback}>{'Return to ' + this.props.listType}</button>)
+      <button style={endOfQuestionButtonStyles} onClick={callback}>{'Return to ' + this.props.listType}</button>)
   }
 
 }

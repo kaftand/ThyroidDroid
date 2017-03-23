@@ -147,8 +147,15 @@ export const lessonPanelStyles = {
     margin: 'auto',
   },
   quizButton:{
-    display:'block',
-    width:'100%'
+    display: 'block',
+    margin: 'auto',
+    padding: '10px',
+    border: '2px',
+    borderRadius: '5px',
+    margin: '5px',
+    width:'100%',
+    color: UNMCWhite,
+    background:UNMCRed
   }
 }
 
@@ -177,4 +184,16 @@ export const questionStyles = {
   answer:{
 
   }
+}
+
+export const endOfQuestionButtonStyles = {
+    display: 'block',
+    margin: 'auto',
+    padding: '10px',
+    border: '2px',
+    borderRadius: '5px',
+    margin: '5px',
+    width:'100%',
+    color: UNMCWhite,
+    background:UNMCRed
 }

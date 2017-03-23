@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {endOfQuestionButtonStyles} from '../styles';
 
 class NextQuestionButton extends Component
 {
@@ -24,7 +25,7 @@ class NextQuestionButton extends Component
     }
     var callback = this.buttonCallback(this.props.setQuestionNumber, this.props.questionOrder[questionNumber], questionNumber);
    return (
-    <button onClick={callback}>Next Question</button>)
+    <button style={endOfQuestionButtonStyles} onClick={callback}>Next Question</button>)
   }
 
 }
