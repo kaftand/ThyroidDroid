@@ -112,7 +112,7 @@ export const caseStyles = {
   graduated:
   {
     listStyleType: 'none',
-    display: 'table',
+    display: 'inline-block',
     padding: '10px',
     border: '2px',
     borderRadius: '5px',
