@@ -7,6 +7,9 @@ export default function (state=0, action) {
     case 'QUIZ_ORDERED':
       return 0;
       break;
+    case 'MODE_SELECTED':
+      return 0;
+      break;
   }
   return state
 }
