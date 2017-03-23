@@ -371,7 +371,7 @@ export function answeredQuiz (correct, lessonNumber, lesson, username) {
     {
       if(correct)
       {
-        var caseNumber = lesson.part.slice(5);
+        var caseNumber = parseInt(lesson.part.slice(5)) -1;
         dbref.child(lesson.topic).child(username).child(caseNumber).update({
           completed:true,
         })
