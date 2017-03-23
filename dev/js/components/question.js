@@ -5,6 +5,7 @@ import GradeSelf from './grade-self'
 import CorrectAnswer from './correct-answer'
 import IncorrectAnswer from './incorrect-answer'
 import NextQuestionButtonContainer from '../containers/next-question-button-container'
+import BackToListButtonContainer from '../containers/back-to-list-button-container'
 import {questionStyles} from '../styles'
 
 class Question extends Component {
@@ -25,6 +26,16 @@ class Question extends Component {
       return <GradeSelf lesson={lesson} lessonNumber={lessonNumber} onAnswer={onAnswer}/>
     }
   }
+  createContinueButtons (numberOfQuestions)
+  {
+    var continueButtons = new Array();
+    if (numberOfQuestions > 1)
+    {
+      continueButtons.push(<NextQuestionButtonContainer key='nxq'/>);
+    }
+    continueButtons.push(<BackToListButtonContainer key='gob' />);
+    return continueButtons
+  }
   createQuizAnswer (onAnswer, lesson, lessonNumber, username) {
     return function (correct) {
       onAnswer(correct, lessonNumber, lesson, username)
@@ -33,12 +44,15 @@ class Question extends Component {
   render ()
  {
    var miniLesson = this.props.lesson.miniLessons[this.props.quiz.lessonNumber];
+   var numberOfQuestions = this.props.lesson.miniLessons.length;
+   var continueButtons = this.createContinueButtons(numberOfQuestions);
    var onAnswer = this.createQuizAnswer(
                                         this.props.answeredQuiz,
                                         this.props.lesson,
                                         this.props.quiz.lessonNumber,
                                         this.props.username)
    var question = miniLesson.question;
+   console.log(numberOfQuestions)
    if(!this.props.quiz.responded)
    {
      var answerContent = this.determineQuestionType(question, onAnswer, this.props.lesson, this.props.quiz.lessonNumber);
@@ -47,7 +61,9 @@ class Question extends Component {
    {
      var answerContent = (<div>
                             <CorrectAnswer miniLessonText={miniLesson.text}/>
-                            <NextQuestionButtonContainer />
+                            <div>
+                              {continueButtons}
+                            </div>
                           </div>)
 
    }
@@ -55,7 +71,9 @@ class Question extends Component {
    {
      var answerContent = (<div>
                             <IncorrectAnswer miniLessonText={miniLesson.text}  correctAnswer={question.correctAnswers[0]}/>
-                            <NextQuestionButtonContainer />
+                            <div>
+                              {continueButtons}
+                            </div>
                           </div>)
    }
    var questionText = question.questionText;

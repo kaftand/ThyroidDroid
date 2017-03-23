@@ -46,7 +46,7 @@ class Cases extends Component {
   }
   else
   {
-    caseList = <div>Loading...</div>
+    var caseList = <div>Loading...</div>
   }
    return <ul style={caseStyles.container}>{caseList}</ul>
   }
