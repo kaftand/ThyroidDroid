@@ -68,12 +68,10 @@ export function extractLesson (wholeString) {
 
 export function extractMiniLessons (wholeString) {
   var minilessonsText = extractFromTags('MINI_LESSON<','END_MINI_LESSON/>', wholeString);
-  console.log(minilessonsText)
   var miniLessons = [];
-  console.log(typeof(wholeString))
   for (var iMiniLesson = 0; iMiniLesson < minilessonsText.length; iMiniLesson++)
   {
-    var text = extractFromBarrenTag(TEXT_START, minilessonsText[iMiniLesson]);
+    var text = extractFromText(TEXT_START, minilessonsText[iMiniLesson]);
     var question = extractFromFertileTag(QUESTION_START, minilessonsText[iMiniLesson]);
     var questionText = extractFromTags(QUESTION_START, QUESTION_TEXT_END, minilessonsText[iMiniLesson])[0];
     var multipleChoice = extractFromBarrenTag(MULTIPLE_CHOICE_START, question) === 'y';
@@ -123,6 +121,20 @@ export function extractFromBarrenTag(startTag, a) {
   if(barrenString)
   {
   return barrenString[1];
+  }
+  else
+  {
+    return null;
+  }
+}
+
+export function extractFromText(startTag, a) {
+  var barrenString = a.match(startTag + '(.*?)[.]/>');
+  console.log("SEE THIS")
+  console.log(barrenString)
+  if(barrenString)
+  {
+  return barrenString[1] + '.';
   }
   else
   {
