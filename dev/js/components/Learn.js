@@ -5,9 +5,9 @@ class Learn extends Component {
   constructor(props) {
     super(props)
   }
-  createClickFunction (topic, name, topicSelector) {
+  createClickFunction (topic, name, topicSelector, photoCred) {
     return function () {
-      topicSelector(topic, name.replace(' ', ''))
+      topicSelector(topic, name.replace(' ', ''), photoCred)
     }
   }
   buildTopicList (firebaseTopics, topicSelector) {
@@ -21,15 +21,16 @@ class Learn extends Component {
         var partlist = [];
         for (var iPart in thisTopic[iTopicName])
         {
-          if(thisTopic[iTopicName][iPart])
+          if(thisTopic[iTopicName][iPart].graduated)
           {
             var thisPartStyle = lessonStyles.graduated;
           } else {
             var thisPartStyle = lessonStyles.notGraduated;
           }
+          var photoCred = thisTopic[iTopicName][iPart].PhotoCred;
           partlist.push(
             <li style={thisPartStyle} key={iTopicName+iPart} onClick={
-              this.createClickFunction(topicName, iPart, topicSelector)
+              this.createClickFunction(topicName, iPart, topicSelector, photoCred)
             }
             >{iPart}</li>
           )

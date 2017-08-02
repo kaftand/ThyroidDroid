@@ -161,7 +161,7 @@ export function authSignOut () {
   }
 }
 
-export function loadLessons(topic, part) {
+export function loadLessons(topic, part, photoCred) {
   return dispatch => {
     firebase.storage().ref().child('/' + topic + '/' + part.replace(' ','') + '.txt').getDownloadURL().then(
         function (url){
@@ -176,6 +176,7 @@ export function loadLessons(topic, part) {
               var lesson = extractLesson(data.data)
               lesson.topic = topic;
               lesson.part = part;
+              lesson.photoCred = photoCred;
               lesson.questionOrder = orderQuiz(lesson.miniLessons.length)
               console.log(lesson)
               firebase.storage().ref().child('/' + topic + '/' + part.replace(' ','') + '.png').getDownloadURL().then(
@@ -211,6 +212,7 @@ export function getTopics (username) {
       firebase.database().ref().child("Graduated").child(username).on("value", snapshot => {
         var topics = topicSnap.val();
         var graduated = snapshot.val();
+        var topicsRaw = topics;
         if (!graduated)
         {
           graduated = new Object();
@@ -239,7 +241,7 @@ export function getTopics (username) {
                   graduated[topicName][partNameDeblanked] = false;
                   topicsToPost[topicName] = graduated[topicName];
                 }
-                topics[iTopic][topicName][partName] = graduated[topicName][partNameDeblanked];
+                topics[iTopic][topicName][partName].graduated = graduated[topicName][partNameDeblanked];
               }
             }
           }
@@ -251,7 +253,7 @@ export function getTopics (username) {
         }
         dispatch({
           type:'TOPIC_PULL',
-          payload: topics
+          payload: topics,
         })
       })
     })

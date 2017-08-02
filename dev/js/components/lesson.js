@@ -32,6 +32,7 @@ class Lesson extends Component {
       <div>
         <div style={lessonPanelStyles.text}>{lessonText}</div>
         <img style={lessonPanelStyles.picture} src={this.props.lesson.pic}/>
+        <p> {this.props.lesson.caption + ' Photo courtesy of ' + this.props.lesson.photoCred + '.'} </p>
         <button style={lessonPanelStyles.quizButton} onClick={quizCallback}>Quiz</button>
       </div>
     )

@@ -130,8 +130,6 @@ export function extractFromBarrenTag(startTag, a) {
 
 export function extractFromText(startTag, a) {
   var barrenString = a.match(startTag + '(.*?)[.]/>');
-  console.log("SEE THIS")
-  console.log(barrenString)
   if(barrenString)
   {
   return barrenString[1] + '.';
