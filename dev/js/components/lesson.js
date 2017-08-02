@@ -28,11 +28,24 @@ class Lesson extends Component {
     var lessonText = this.combineMiniLessons(this.props.lesson.miniLessons);
     var randNumber = Math.floor((Math.random() * this.props.lesson.miniLessons.length));
     var quizCallback = this.createQuizOnClick (this.props.lesson.questionOrder[this.props.questionNumber], this.props.startQuiz);
+    var isCase = this.props.lesson.topic == "Cases";
+    if (isCase)
+    {
+      console.log(this.props.lesson.casePhotoCred)
+      if (this.props.lesson.casePhotoCred[0] === "Not sure yet")
+      {
+        var photoCaption = '';
+      } else{
+        var photoCaption = 'Photo courtesy of ' + this.props.lesson.casePhotoCred[0] + '.';
+      }
+    } else {
+      var photoCaption = this.props.lesson.caption + ' Photo courtesy of ' + this.props.lesson.photoCred + '.';
+    }
     return (
       <div>
         <div style={lessonPanelStyles.text}>{lessonText}</div>
         <img style={lessonPanelStyles.picture} src={this.props.lesson.pic}/>
-        <p> {this.props.lesson.caption + ' Photo courtesy of ' + this.props.lesson.photoCred + '.'} </p>
+        <p> {photoCaption} </p>
         <button style={lessonPanelStyles.quizButton} onClick={quizCallback}>Quiz</button>
       </div>
     )

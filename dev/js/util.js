@@ -16,6 +16,8 @@ var INC_ANSWER1_START = 'INC_ANSWER1<'
 var INC_ANSWER2_START = 'INC_ANSWER2<'
 var INC_ANSWER3_START = 'INC_ANSWER3<'
 var CAPTION_START = 'CAPTION<'
+var PHOTO_CREDIT_START = 'PHOTO_CREDIT<'
+var PHOTO_CREDIT_END = '/>PHOTO_CREDIT'
 
 
 
@@ -59,10 +61,12 @@ export function bubbleSortFTWFields(objects, field) {
 export function extractLesson (wholeString) {
     var wholeStringNoEndLines = wholeString.replace(/(\r\n|\n|\r)/gm,"");
     var caption = extractFromBarrenTag(CAPTION_START, wholeStringNoEndLines);
+    var casePhotoCred = extractFromTags(PHOTO_CREDIT_START,PHOTO_CREDIT_END, wholeStringNoEndLines)
     var miniLessons = extractMiniLessons(wholeStringNoEndLines);
     return {
       caption: caption,
-      miniLessons: miniLessons
+      miniLessons: miniLessons,
+      casePhotoCred: casePhotoCred
     }
 }
 
