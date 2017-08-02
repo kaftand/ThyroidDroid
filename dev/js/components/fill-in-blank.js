@@ -19,7 +19,6 @@ class FillInBlank extends Component
         function () {
           var correct=false;
           var enteredAnswer = this.state.responseText;
-          console.log('ce', correctAnswer);
           for(var iAnswer = 0; iAnswer < correctAnswer.length; iAnswer++)
           {
             console.log(enteredAnswer.toLowerCase(), correctAnswer[iAnswer].toLowerCase())
