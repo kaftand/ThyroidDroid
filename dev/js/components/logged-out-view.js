@@ -16,6 +16,8 @@ class LoggedInView extends Component
       <img style={{
         display: 'block',
         margin: 'auto',
+        maxHeight: '50%',
+        maxWidth: '50%',
       }} src={'./UNMCEditedLogo.png'} />
       <p> {'Funding provided by an award from the Office of the Vice Chancellor \
       for Academic Affairs at the University of Nebraska Medical Center 2017. \
