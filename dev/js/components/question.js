@@ -52,7 +52,7 @@ class Question extends Component {
                                         this.props.quiz.lessonNumber,
                                         this.props.username)
    var question = miniLesson.question;
-   console.log(numberOfQuestions)
+   var isCase = this.props.lesson.topic == "Cases";
    if(!this.props.quiz.responded)
    {
      var answerContent = this.determineQuestionType(question, onAnswer, this.props.lesson, this.props.quiz.lessonNumber);
@@ -60,7 +60,7 @@ class Question extends Component {
    else if(this.props.quiz.correct)
    {
      var answerContent = (<div>
-                            <CorrectAnswer miniLessonText={miniLesson.text}/>
+                            <CorrectAnswer isCase={isCase} miniLessonText={miniLesson.text}/>
                             <div>
                               {continueButtons}
                             </div>
@@ -70,7 +70,7 @@ class Question extends Component {
    else
    {
      var answerContent = (<div>
-                            <IncorrectAnswer miniLessonText={miniLesson.text}  correctAnswer={question.correctAnswers[0]}/>
+                            <IncorrectAnswer isCase={isCase} miniLessonText={miniLesson.text}  correctAnswer={question.correctAnswers[0]}/>
                             <div>
                               {continueButtons}
                             </div>

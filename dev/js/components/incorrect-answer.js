@@ -9,6 +9,14 @@ class IncorrectAnswer extends Component
   }
   render ()
   {
+    var questionContent;
+    if (this.props.isCase)
+    {
+      questionContent = <div/>;
+
+    } else {
+      questionContent = Parser(this.props.miniLessonText);
+    }
     return (
       <div>
         <div>
@@ -16,7 +24,7 @@ class IncorrectAnswer extends Component
           {' ' + this.props.correctAnswer}
         </div>
         <div>
-          {Parser(this.props.miniLessonText)}
+          {questionContent}
         </div>
       </div>
     )

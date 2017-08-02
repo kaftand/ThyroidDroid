@@ -3,10 +3,24 @@ const UNMCWhite =  '#ffffff';
 const UNMCGreen =  '#a1b426';
 
 export const headerStyle = {
-  width:'100%',
+  width:'80%',
   color:UNMCWhite,
   background: UNMCRed,
-  fontSize: 'auto'
+  fontSize: 'auto',
+  textAlign: 'center',
+  margin: 'auto',
+  borderRadius: '5px',
+  paddingTop: '5px',
+  paddingBotton: '5px'
+}
+
+export const appStyle = {
+  width:'80%',
+  margin: 'auto',
+}
+
+export const loggedInViewStyle = {
+  height: '0px'
 }
 
 export const loginStyles = {
@@ -23,6 +37,11 @@ export const loginStyles = {
     color:UNMCGreen,
     textAlign:'center'
   }
+}
+
+export const logoutStyle = {
+  float: 'right',
+  marginBottom: '10px'
 }
 
 export const gameModeStyles = {
@@ -145,6 +164,8 @@ export const lessonPanelStyles = {
   picture:{
     display: 'block',
     margin: 'auto',
+    maxWidth: '100%',
+    height: 'auto'
   },
   quizButton:{
     display: 'block',
