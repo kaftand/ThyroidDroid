@@ -9,6 +9,15 @@ var fbconfig = {
   storageBucket: "uterine-pathology.appspot.com",
   messagingSenderId: "657975423881"
 };
+
+var fbconfig = {
+    apiKey: "AIzaSyB6rDA4V6hD14An5S5nZ2qRWl8y9utANrM",
+    authDomain: "thyroid-pathology.firebaseapp.com",
+    databaseURL: "https://thyroid-pathology.firebaseio.com",
+    //projectId: "thyroid-pathology",
+    storageBucket: "thyroid-pathology.appspot.com",
+    messagingSenderId: "155781070332"
+  };
 firebase.initializeApp(fbconfig);
 
 const auth = firebase.auth();
@@ -163,12 +172,14 @@ export function authSignOut () {
 
 export function loadLessons(topic, part, photoCred) {
   return dispatch => {
+    console.log ('help')
     firebase.storage().ref().child('/' + topic + '/' + part.replace(' ','') + '.txt').getDownloadURL().then(
         function (url){
           console.log(url)
           var instance = axios.create({
             baseURL: url,
             timeout: 1000,
+            mode: 'cors',
           });
           instance.get(url).then(
             function (data) {
